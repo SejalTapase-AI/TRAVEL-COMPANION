@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/welcome_screen.dart';
-
+import 'screens/safety_home_screen.dart';
 void main() {
   runApp(const TravelCompanionApp());
 }
@@ -21,6 +21,9 @@ class TravelCompanionApp extends StatelessWidget {
         ),
       ),
       home: const WelcomeScreen(),
+      routes: {
+        '/safety': (context) => const SafetyHomeScreen(),
+      },
     );
   }
 }

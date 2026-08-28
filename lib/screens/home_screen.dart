@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'destination_search_screen.dart';
 import 'trip_timeline_screen.dart';
 import 'places_screen.dart';
+import 'safety_home_screen.dart';
 import 'place_details_screen.dart';
 import 'find_local_screen.dart';
 
@@ -463,67 +464,67 @@ class HomeScreen extends StatelessWidget {
             // QUICK ACTIONS
             // ─────────────────────────────────
             SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  22,
-                  30,
-                  22,
-                  15,
-                ),
-                child: const Text(
-                  'What do you want to do?',
-                  style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
-                    color: darkText,
-                  ),
-                ),
+  child: Padding(
+    padding: const EdgeInsets.fromLTRB(
+      22,
+      0,
+      22,
+      30,
+    ),
+    child: Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: QuickActionCard(
+                icon: Icons.explore_rounded,
+                title: 'Explore',
+                subtitle: 'Discover places',
+                onTap: () => openExplore(context),
               ),
             ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: QuickActionCard(
+                icon: Icons.people_alt_rounded,
+                title: 'Find a Local',
+                subtitle: 'Meet someone local',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FindLocalScreen(
+                        placeName: 'Fort Aguada',
+                        destination: 'Goa',
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
 
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  22,
-                  0,
-                  22,
-                  30,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: QuickActionCard(
-                        icon: Icons.explore_rounded,
-                        title: 'Explore',
-                        subtitle: 'Discover places',
-                        onTap: () =>
-                            openExplore(context),
-                      ),
-                    ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: QuickActionCard(
-                        icon: Icons.people_alt_rounded,
-                        title: 'Find a Local',
-                        subtitle: 'Meet someone local',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const FindLocalScreen(
-                                placeName: 'Fort Aguada',
-                                destination: 'Goa',
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+        const SizedBox(height: 14),
+
+        // Safety Center
+        QuickActionCard(
+          icon: Icons.shield_rounded,
+          title: 'Safety Center',
+          subtitle: 'SOS & emergency help',
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SafetyHomeScreen(),
               ),
-            ),
+            );
+          },
+        ),
+      ],
+    ),
+  ),
+),
           ],
         ),
       ),
