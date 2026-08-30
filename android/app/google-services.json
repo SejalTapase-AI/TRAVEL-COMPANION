@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "723037143957",
+    "project_id": "travel-companion-hackathon",
+    "storage_bucket": "travel-companion-hackathon.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723037143957:android:4bbdf412ae9fd7df51ac9c",
+        "android_client_info": {
+          "package_name": "com.example.travel_companion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZhnYeswZT4Z4OKH2CmJkQgALPeHEkrRo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

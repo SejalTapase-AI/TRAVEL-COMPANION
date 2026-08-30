@@ -6,6 +6,7 @@ import 'places_screen.dart';
 import 'safety_home_screen.dart';
 import 'place_details_screen.dart';
 import 'find_local_screen.dart';
+import 'connection_requests_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -72,6 +73,27 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  void openFindLocal(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const FindLocalScreen(
+          placeName: 'Fort Aguada',
+          destination: 'Goa',
+        ),
+      ),
+    );
+  }
+
+  void openConnectionRequests(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const ConnectionRequestsScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,9 +132,13 @@ class HomeScreen extends StatelessWidget {
         },
       ),
 
+      // ─────────────────────────────────────
+      // BODY
+      // ─────────────────────────────────────
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
+
             // ─────────────────────────────────
             // HEADER
             // ─────────────────────────────────
@@ -266,6 +292,9 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
+            // ─────────────────────────────────
+            // DESTINATION CARDS
+            // ─────────────────────────────────
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 175,
@@ -352,6 +381,9 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
+            // ─────────────────────────────────
+            // FORT AGUADA
+            // ─────────────────────────────────
             SliverToBoxAdapter(
               child: Padding(
                 padding:
@@ -402,7 +434,9 @@ class HomeScreen extends StatelessWidget {
                             color: teal,
                           ),
                         ),
+
                         const SizedBox(width: 15),
+
                         const Expanded(
                           child: Column(
                             crossAxisAlignment:
@@ -448,6 +482,7 @@ class HomeScreen extends StatelessWidget {
                             ],
                           ),
                         ),
+
                         const Icon(
                           Icons.arrow_forward_ios_rounded,
                           size: 16,
@@ -464,67 +499,80 @@ class HomeScreen extends StatelessWidget {
             // QUICK ACTIONS
             // ─────────────────────────────────
             SliverToBoxAdapter(
-  child: Padding(
-    padding: const EdgeInsets.fromLTRB(
-      22,
-      0,
-      22,
-      30,
-    ),
-    child: Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: QuickActionCard(
-                icon: Icons.explore_rounded,
-                title: 'Explore',
-                subtitle: 'Discover places',
-                onTap: () => openExplore(context),
-              ),
-            ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: QuickActionCard(
-                icon: Icons.people_alt_rounded,
-                title: 'Find a Local',
-                subtitle: 'Meet someone local',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const FindLocalScreen(
-                        placeName: 'Fort Aguada',
-                        destination: 'Goa',
-                      ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  22,
+                  30,
+                  22,
+                  30,
+                ),
+                child: Column(
+                  children: [
+
+                    // ROW 1
+                    Row(
+                      children: [
+                        Expanded(
+                          child: QuickActionCard(
+                            icon: Icons.explore_rounded,
+                            title: 'Explore',
+                            subtitle: 'Discover places',
+                            onTap: () =>
+                                openExplore(context),
+                          ),
+                        ),
+
+                        const SizedBox(width: 14),
+
+                        Expanded(
+                          child: QuickActionCard(
+                            icon:
+                                Icons.people_alt_rounded,
+                            title: 'Find a Local',
+                            subtitle:
+                                'Meet someone local',
+                            onTap: () =>
+                                openFindLocal(context),
+                          ),
+                        ),
+                      ],
                     ),
-                  );
-                },
+
+                    const SizedBox(height: 14),
+
+                    // SAFETY CENTER
+                    QuickActionCard(
+                      icon: Icons.shield_rounded,
+                      title: 'Safety Center',
+                      subtitle:
+                          'SOS & emergency help',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const SafetyHomeScreen(),
+                          ),
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: 14),
+
+                    // CONNECTION REQUESTS
+                    QuickActionCard(
+                      icon:
+                          Icons.person_add_alt_1_rounded,
+                      title: 'Connection Requests',
+                      subtitle:
+                          'View traveller requests',
+                      onTap: () =>
+                          openConnectionRequests(context),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ],
-        ),
-
-        const SizedBox(height: 14),
-
-        // Safety Center
-        QuickActionCard(
-          icon: Icons.shield_rounded,
-          title: 'Safety Center',
-          subtitle: 'SOS & emergency help',
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const SafetyHomeScreen(),
-              ),
-            );
-          },
-        ),
-      ],
-    ),
-  ),
-),
           ],
         ),
       ),
@@ -590,7 +638,9 @@ class DestinationCard extends StatelessWidget {
                 size: 26,
               ),
             ),
+
             const Spacer(),
+
             Text(
               name,
               style: const TextStyle(
@@ -599,7 +649,9 @@ class DestinationCard extends StatelessWidget {
                 color: Color(0xFF12343B),
               ),
             ),
+
             const SizedBox(height: 3),
+
             Text(
               subtitle,
               style: const TextStyle(
@@ -637,6 +689,7 @@ class QuickActionCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: double.infinity,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: const Color(0xFF087E8B),
@@ -648,12 +701,15 @@ class QuickActionCard extends StatelessWidget {
               CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 4),
+
             Icon(
               icon,
               color: Colors.white,
               size: 28,
             ),
+
             const SizedBox(height: 18),
+
             Text(
               title,
               style: const TextStyle(
@@ -662,7 +718,9 @@ class QuickActionCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
             const SizedBox(height: 4),
+
             Text(
               subtitle,
               style: const TextStyle(

@@ -1,7 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'screens/welcome_screen.dart';
-import 'screens/safety_home_screen.dart';
-void main() {
+
+import 'firebase_options.dart';
+import 'screens/auth_screen.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const TravelCompanionApp());
 }
 
@@ -20,10 +29,7 @@ class TravelCompanionApp extends StatelessWidget {
           seedColor: const Color(0xFF087E8B),
         ),
       ),
-      home: const WelcomeScreen(),
-      routes: {
-        '/safety': (context) => const SafetyHomeScreen(),
-      },
+      home: const AuthScreen(),
     );
   }
 }
