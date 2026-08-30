@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'emergency_contacts_screen.dart';
 import 'emergency_services_screen.dart';
+import 'safety_extra_screens.dart';
 
 class SafetyHomeScreen extends StatelessWidget {
   const SafetyHomeScreen({super.key});
@@ -60,7 +61,6 @@ class SafetyHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: lightBackground,
-
       appBar: AppBar(
         title: const Text(
           'Safety Center',
@@ -73,7 +73,6 @@ class SafetyHomeScreen extends StatelessWidget {
         foregroundColor: darkText,
         elevation: 0,
       ),
-
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -115,7 +114,7 @@ class SafetyHomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.red.withOpacity(0.25),
+                        color: Colors.red.withValues(alpha: 0.25),
                         blurRadius: 15,
                         spreadRadius: 3,
                       ),
@@ -129,9 +128,7 @@ class SafetyHomeScreen extends StatelessWidget {
                         color: Colors.white,
                         size: 65,
                       ),
-
                       SizedBox(height: 10),
-
                       Text(
                         'SOS',
                         style: TextStyle(
@@ -140,9 +137,7 @@ class SafetyHomeScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-
                       SizedBox(height: 5),
-
                       Text(
                         'Tap for emergency help',
                         style: TextStyle(
@@ -219,11 +214,11 @@ class SafetyHomeScreen extends StatelessWidget {
                 title: 'Group Tracker',
                 subtitle: 'See your travel group status',
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Group Tracker selected',
-                      ),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const GroupTrackerScreen(),
                     ),
                   );
                 },
@@ -238,11 +233,11 @@ class SafetyHomeScreen extends StatelessWidget {
                 title: 'Safety Alerts',
                 subtitle: 'Stay updated about your destination',
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Safety Alerts selected',
-                      ),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const SafetyAlertsScreen(),
                     ),
                   );
                 },
@@ -257,11 +252,11 @@ class SafetyHomeScreen extends StatelessWidget {
                 title: 'Safety Tips',
                 subtitle: 'Useful tips for safer travelling',
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Safety Tips selected',
-                      ),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const SafetyTipsScreen(),
                     ),
                   );
                 },
@@ -287,9 +282,7 @@ class SafetyHomeScreen extends StatelessWidget {
                       color: teal,
                       size: 25,
                     ),
-
                     SizedBox(width: 12),
-
                     Expanded(
                       child: Text(
                         'Your safety information is private '
@@ -340,12 +333,10 @@ class SafetyCard extends StatelessWidget {
       ),
       child: ListTile(
         onTap: onTap,
-
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 8,
         ),
-
         leading: Container(
           width: 48,
           height: 48,
@@ -359,20 +350,17 @@ class SafetyCard extends StatelessWidget {
             size: 25,
           ),
         ),
-
         title: Text(
           title,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
-            color: const Color(0xFF12343B),
+            color: Color(0xFF12343B),
           ),
         ),
-
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 4),
           child: Text(subtitle),
         ),
-
         trailing: const Icon(
           Icons.arrow_forward_ios,
           size: 15,

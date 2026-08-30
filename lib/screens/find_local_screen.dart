@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../ashwini_module.dart';
 
 class FindLocalScreen extends StatelessWidget {
   final String placeName;
@@ -234,12 +235,10 @@ class FindLocalScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      'Connection request sent to $name!',
-                    ),
-                    behavior: SnackBarBehavior.floating,
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LocalProfileScreen(),
                   ),
                 );
               },
